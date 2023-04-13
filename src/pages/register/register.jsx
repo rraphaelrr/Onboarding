@@ -1,8 +1,8 @@
+/* eslint-disable eqeqeq */
 import React, { Component } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as IconMd from "react-icons/md";
-import { saveAs } from "file-saver";
 
 /* Import Info */
 import "../../styles/style_info.scss";
@@ -30,6 +30,15 @@ import CaptureDocFront from "../../models/captureRegistre/docFront/CaptureDocFro
 import ModalDocFront from "../../models/captureRegistre/docFront/ModalDocFront";
 import ImgDocFront from "../../models/captureRegistre/docFront/ImgDocFront";
 import BtnCaptureDocFront from "../../models/captureRegistre/docFront/BtnCaptureDocFront";
+import CaptureConfirmDocFront from "../../models/captureRegistre/docFront/CaptureConfirmDocFront";
+
+import TextTopDocBack from "../../models/captureRegistre/docBack/TextTopDocBack";
+import TextTipDocBack from "../../models/captureRegistre/docBack/TextTipDocBack";
+import CaptureDocBack from "../../models/captureRegistre/docBack/CaptureDocBack";
+import ModalDocBack from "../../models/captureRegistre/docBack/ModalDocBack";
+import ImgDocBack from "../../models/captureRegistre/docBack/ImgDocBack";
+import BtnCaptureDocBack from "../../models/captureRegistre/docBack/BtnCaptureDocBack";
+import CaptureConfirmDocBack from "../../models/captureRegistre/docBack/CaptureConfirmDocBack";
 
 export default class Register extends Component {
   constructor(props) {
@@ -54,15 +63,30 @@ export default class Register extends Component {
       disabledSelectDoc: false,
       typeDocText: "RG",
       typeCapture: "",
+
       docFront: true,
       docBack: false,
       selfieUser: false,
+
       docFrontCapture: null,
       viewDocFront: false,
+
+      docBackCapture: null,
+      viewDocBack: false,
+
+      confirmCaptureFront: false,
+      confirmCaptureBack: false,
     };
   }
 
   componentDidMount = () => {
+    if (
+      "mediaDevices" in navigator &&
+      "getUserMedia" in navigator.mediaDevices
+    ) {
+      navigator.mediaDevices.getUserMedia({ video: true });
+    }
+
     const userRegistrer = [
       {
         nome: "FERNANDO LEONARDO JOÃO MOREIRA ",
@@ -165,22 +189,50 @@ export default class Register extends Component {
     });
   };
 
-  handleDownload = () => {
-    const docfront = this.state.docFrontCapture;
-    const byteString = atob(docfront.split(",")[1]);
-    const mimeString = docfront.split(",")[0].split(":")[1].split(";")[0];
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
+  captureDocBack = (img) => {
+    this.setState({
+      viewDocBack: true,
+      docBackCapture: img,
+      viewDocFront: false,
+    });
+  };
 
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
+  captureDocSelfie = (img) => {
+    this.setState({
+      docFrontCapture: img,
+      viewDocFront: true,
+      disabledSelectDoc: true,
+    });
+  };
+
+  confirmCaptureDocFront = (id) => {
+    if (id == 1) {
+      this.setState({
+        docFrontCapture: null,
+        viewDocFront: false,
+        disabledSelectDoc: false,
+      });
+    } else if (id == 2) {
+      this.setState({
+        docFront: false,
+        docBack: true,
+        confirmCapture: false,
+        docBackCapture: null,
+      });
     }
+  };
 
-    const blob = new Blob([ab], { type: mimeString });
-    saveAs(
-      blob,
-      this.state.typeDocText + "_" + this.state.typeCapture + ".jpg"
-    );
+  confirmCaptureDocBack = (id) => {
+    if (id == 1) {
+      this.setState({
+        docBackCapture: null,
+        viewDocBack: false,
+      });
+    } else if (id == 2) {
+      this.setState({
+        docBack: false,
+      });
+    }
   };
 
   render() {
@@ -326,7 +378,86 @@ export default class Register extends Component {
                                   disabledSelectDoc: false,
                                 })
                               }
-                              actionBtnConfirm={() => this.handleDownload()}
+                              actionBtnConfirm={() =>
+                                this.setState({ confirmCaptureFront: true })
+                              }
+                            />
+                          )}
+                          {Products.captureRegistre.docFront.confirmCapture && (
+                            <CaptureConfirmDocFront
+                              showConfirmModal={this.state.confirmCaptureFront}
+                              cancelFunction={() =>
+                                this.confirmCaptureDocFront(1)
+                              }
+                              confirmFunction={() =>
+                                this.confirmCaptureDocFront(2)
+                              }
+                            />
+                          )}
+                        </>
+                      )
+                    }
+                  />
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+
+            {this.state.docBack ? (
+              <>
+                {Products.captureRegistre.docBack.textTop && <TextTopDocBack />}
+
+                {Products.captureRegistre.docBack.textTip && <TextTipDocBack />}
+
+                {Products.captureRegistre.docBack.modalDocBack && (
+                  <ModalDocBack
+                    nameBtn={"Capturar Foto "}
+                    selectDoc={this.state.disabledSelectDoc}
+                    optionRg={"RG"}
+                    optionCnh={"CNH"}
+                    changeDoc={this.state.typeDoc}
+                    changeDocConfirm={(e) => this.changeDoc(e)}
+                    modalHeader={this.state.typeDocText + " Verso"}
+                    modalBody={
+                      Products.captureRegistre.docBack.captureDocBack &&
+                      this.state.viewDocBack === false ? (
+                        <CaptureDocBack capture={this.captureDocBack} />
+                      ) : (
+                        <>
+                          {Products.captureRegistre.docBack.imgDocBack && (
+                            <ImgDocBack
+                              titleImgDocBack={
+                                this.state.typeDocText + " Verso"
+                              }
+                              imgDocBack={this.state.docBackCapture}
+                            />
+                          )}
+                          {Products.captureRegistre.docBack
+                            .btnCaptureDocBack && (
+                            <BtnCaptureDocBack
+                              btnNameReset={"Tirar Novamente"}
+                              btnNameConfirm={"Confirmar Foto"}
+                              actionBtnReset={() =>
+                                this.setState({
+                                  docBackCapture: null,
+                                  viewDocBack: false,
+                                })
+                              }
+                              actionBtnConfirm={() =>
+                                this.setState({ confirmCaptureBack: true })
+                              }
+                            />
+                          )}
+                          {Products.captureRegistre.docFront.confirmCapture && (
+                            <CaptureConfirmDocBack
+                              showConfirmModal={this.state.confirmCaptureBack}
+                              cancelFunction={() =>
+                                this.confirmCaptureDocBack(1)
+                              }
+                              confirmFunction={() =>
+                                this.confirmCaptureDocBack(2)
+                              }
                             />
                           )}
                         </>

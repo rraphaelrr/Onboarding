@@ -14,6 +14,7 @@
     width: 100%;
     background-image: url("../assets/img/maskDocFront.png");
   }
+
   .btnCapturePhoto {
     width: 100%;
     background: $bckgCopartEUAHeader;
@@ -34,8 +35,42 @@
     margin-top: 10px;
   }
 
-  /* .btnCaptureConfirm {
+  .btnConfirmCapture {
     background: $bckgCopartEUAHeader;
     width: 100%;
-  } */
+    border: none;
+    font-size: 20px;
+  }
+
+  .btnCancelCapture {
+    background-color: $redWarning;
+    width: 100%;
+    border: none;
+    font-size: 20px
+  }
+  .modalConfirmCaptureDocFront {
+    p {
+      color: $redWarning;
+      font-size: 18px;
+      font-weight: $bold;
+    }
+  }
+
+  .textTopDocBack {
+    margin-top: 40px;
+  }
+
+
+  .captureDocBack {
+    width: 100%;
+    background-image: url("../assets/img/maskDocFront.png");
+  }
+
+  .btnModalDocBack {
+    background: $blueCopartEUA;
+    border: none;
+    width: 80%;
+    margin-top: 80px;
+  }
+
 }

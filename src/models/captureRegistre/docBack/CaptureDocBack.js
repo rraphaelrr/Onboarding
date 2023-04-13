@@ -1,15 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { Button, Image } from "react-bootstrap";
 import Webcam from "react-webcam";
 
-function CaptureDocFront({ capture }) {
+function CaptureDocBack({ capture }) {
   const webcamRef = useRef(null);
   const [img, setImg] = useState(null);
 
-  const capturePhoto = () => {
-    const imgSrc = webcamRef.current.getScreenshot();
-    setImg(imgSrc);
-  };
+  const capturePhotoBack = useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setImg(imageSrc);
+  }, [webcamRef, setImg]);
 
   const confirm = () => {
     capture(img);
@@ -24,14 +24,14 @@ function CaptureDocFront({ capture }) {
       {!img ? (
         <div>
           <Webcam
+            
             screenshotQuality={1}
             opacity={6}
             audio={false}
             ref={webcamRef}
-            className="captureDocFront"
-            capture="environment"
+            className="captureDocBack"
           />
-          <Button onClick={capturePhoto} className="btnCapturePhoto">
+          <Button onClick={capturePhotoBack} className="btnCapturePhoto">
             Capturar Foto
           </Button>
         </div>
@@ -48,4 +48,4 @@ function CaptureDocFront({ capture }) {
   );
 }
 
-export default CaptureDocFront;
+export default CaptureDocBack;

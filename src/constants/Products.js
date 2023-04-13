@@ -36,9 +36,16 @@ export default {
       modalDocFront: true,
       imgDocFront: true,
       btnCaptureDocFront: true,
+      confirmCapture: true,
     },
     docBack: {
-      textTop: false,
+      textTop: true,
+      textTip: true,
+      captureDocBack: true,
+      modalDocBack: true,
+      imgDocBack: true,
+      btnCaptureDocBack: true,
+      confirmCapture: true,
     },
     selfieUser: {
       textTop: false,
