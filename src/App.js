@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./styles/style.scss";
+import Routing from "./routing/routing";
+import Header from "./components/header/header";
+import Products from "./constants/Products";
+import Footer from "./components/footer/footer";
+import Info from "./constants/Info";
 
 function App() {
+  document.title = Info.nameBuniss + " - " + Info.nameSystem;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header>{Products.components.header && <Header />}</header>
+      <main>
+        <Routing />
+      </main>
+      <footer>{Products.components.footer && <Footer />}</footer>
     </div>
   );
 }

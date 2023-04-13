@@ -1,0 +1,51 @@
+@import "./styleSheet.scss";
+
+@media all {
+  .confirm {
+    color: $whiteDefault;
+    text-align: center;
+  }
+
+  .loadingConfirm {
+    display: flex;
+    margin: 50px auto;
+  }
+
+  .textInputConfirm {
+    margin: 10px;
+  }
+
+  .formConfirm {
+    margin-top: 20px;
+    li {
+      display: inline-block;
+      margin: 0 0 -5px 5px;
+    }
+
+    input {
+      width: 50%;
+      float: left;
+      height: 10%;
+      margin-top: 1px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      margin-left: -80px;
+      background: $bckgCopartEUAHeader;
+      border: none;
+      height: 10%;
+    }
+  }
+
+  .btnConfirm {
+    margin-top: 30px;
+    width: 60%;
+    background: $bckgCopartEUAHeader;
+    border: none;
+    font-weight: $bold;
+  }
+
+
+}

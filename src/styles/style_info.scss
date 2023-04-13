@@ -1,0 +1,72 @@
+@import "./styleSheet.scss";
+
+@media all {
+  .info {
+    color: $whiteDefault;
+    text-align: center;
+  }
+
+  .infoTextTop {
+    font-size: 50px;
+    font-weight: $black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .infoTextDescr {
+    font-size: 30px;
+    font-weight: $regular;
+  }
+
+  .infoTextTip {
+    border: 1px solid $whiteDefault;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: $light;
+    display: block;
+    margin: 20px auto;
+    background-color: $blackOpactiy;
+    padding-bottom: 10px;
+  }
+
+  .btnCopyInfo {
+    background-color: transparent;
+    border: 1px solid $whiteDefault;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: $regular;
+
+    .iconBtnCopyInfo {
+      margin-right: 10px;
+      font-size: 25px;
+    }
+  }
+
+  .btnStart {
+    background: $bckgCopartEUAHeader;
+    margin-bottom: 20px;
+  }
+
+  
+
+  @media (min-width: 300px) and (max-width: 800px) {
+    .infoTextTop {
+      font-size: 25px;
+    }
+
+    .infoTextDescr {
+      font-size: 20px;
+    }
+
+    .infoTextTip {
+      margin: 20px auto;
+      font-size: 18px;
+    }
+
+    .btnCopyInfo {
+      font-size: 15px;
+    }
+  }
+}

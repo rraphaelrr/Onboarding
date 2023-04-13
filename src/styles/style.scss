@@ -1,0 +1,52 @@
+@import "styleSheet.scss";
+
+@media all {
+  body {
+    font-family: $fontFamily !important;
+  }
+
+  .App {
+    background: $bckgCopartEUAHeader !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100%;
+    min-width: 100%;
+    width: 100%;
+    height: auto;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow: auto;
+  }
+
+  .logo {
+    width: 60%;
+    display: block;
+    margin: auto;
+  }
+  @media (min-width: 300px) and (max-width: 800px) {
+    .logo {
+      width: 80%;
+    }
+  }
+
+  @media (min-width: 801px) and (max-width: 1280px) {
+    .logo {
+      width: 30%;
+    }
+  }
+
+  @media (min-width: 1291px) {
+    .logo {
+      width: 25%;
+    }
+  }
+
+  .header {
+    margin: 20px;
+  }
+}

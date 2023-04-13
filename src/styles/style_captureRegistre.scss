@@ -1,0 +1,41 @@
+@import "./styleSheet.scss";
+
+@media all {
+  .captureRegistre {
+    color: $whiteDefault;
+    text-align: center;
+  }
+
+  .textTopDocFront {
+    margin-top: 40px;
+  }
+
+  .captureDocFront {
+    width: 100%;
+    background-image: url("../assets/img/maskDocFront.png");
+  }
+  .btnCapturePhoto {
+    width: 100%;
+    background: $bckgCopartEUAHeader;
+    border: none;
+  }
+  .btnModalDocFront {
+    background: $blueCopartEUA;
+    border: none;
+    width: 80%;
+    margin-top: 80px;
+  }
+
+  .btnCaptureReset,
+  .btnCaptureConfirm {
+    background: $bckgCopartEUAHeader;
+    width: 100%;
+    border: none;
+    margin-top: 10px;
+  }
+
+  /* .btnCaptureConfirm {
+    background: $bckgCopartEUAHeader;
+    width: 100%;
+  } */
+}
