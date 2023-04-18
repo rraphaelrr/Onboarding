@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as IconMd from "react-icons/md";
+import { isMobile } from "react-device-detect";
 
 /* Import Info */
 import "../../styles/style_info.scss";
@@ -40,6 +41,14 @@ import ImgDocBack from "../../models/captureRegistre/docBack/ImgDocBack";
 import BtnCaptureDocBack from "../../models/captureRegistre/docBack/BtnCaptureDocBack";
 import CaptureConfirmDocBack from "../../models/captureRegistre/docBack/CaptureConfirmDocBack";
 
+import TextTopSelfie from "../../models/captureRegistre/selfieUser/TextTopSelfie";
+import TextTipSelfie from "../../models/captureRegistre/selfieUser/TextTipSelfie";
+import CaptureSelfie from "../../models/captureRegistre/selfieUser/CaptureSelfie";
+import ModalSelfie from "../../models/captureRegistre/selfieUser/ModalSelfie";
+import ImgSelfie from "../../models/captureRegistre/selfieUser/ImgSelfie";
+import BtnCaptureSelfie from "../../models/captureRegistre/selfieUser/BtnCaptureSelfie";
+import CaptureConfirmSelfie from "../../models/captureRegistre/selfieUser/CaptureConfirmSelfie";
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -74,8 +83,12 @@ export default class Register extends Component {
       docBackCapture: null,
       viewDocBack: false,
 
+      selfieCapture: null,
+      viewSelfie: false,
+
       confirmCaptureFront: false,
       confirmCaptureBack: false,
+      confirmCaptureSelfie: false,
     };
   }
 
@@ -197,11 +210,10 @@ export default class Register extends Component {
     });
   };
 
-  captureDocSelfie = (img) => {
+  captureSelfie = (img) => {
     this.setState({
-      docFrontCapture: img,
-      viewDocFront: true,
-      disabledSelectDoc: true,
+      selfieCapture: img,
+      viewSelfie: true,
     });
   };
 
@@ -231,7 +243,23 @@ export default class Register extends Component {
     } else if (id == 2) {
       this.setState({
         docBack: false,
+        selfieUser: true,
       });
+    }
+  };
+
+  confirmCaptureSelfie = (id) => {
+    if (id == 1) {
+      this.setState({
+        selfieCapture: null,
+        viewSelfie: false,
+      });
+    } else if (id == 2) {
+      alert("Hey  ");
+      /*  this.setState({
+        docBack: false,
+        selfieUser: true,
+      }); */
     }
   };
 
@@ -378,9 +406,16 @@ export default class Register extends Component {
                                   disabledSelectDoc: false,
                                 })
                               }
-                              actionBtnConfirm={() =>
-                                this.setState({ confirmCaptureFront: true })
-                              }
+                              actionBtnConfirm={() => {
+                                if (isMobile) {
+                                  document.getElementById(
+                                    "modalFront"
+                                  ).style.visibility = "hidden";
+                                  this.setState({ confirmCaptureFront: true });
+                                } else {
+                                  this.setState({ confirmCaptureFront: true });
+                                }
+                              }}
                             />
                           )}
                           {Products.captureRegistre.docFront.confirmCapture && (
@@ -444,12 +479,19 @@ export default class Register extends Component {
                                   viewDocBack: false,
                                 })
                               }
-                              actionBtnConfirm={() =>
-                                this.setState({ confirmCaptureBack: true })
-                              }
+                              actionBtnConfirm={() => {
+                                if (isMobile) {
+                                  document.getElementById(
+                                    "modalBack"
+                                  ).style.visibility = "hidden";
+                                  this.setState({ confirmCaptureBack: true });
+                                } else {
+                                  this.setState({ confirmCaptureBack: true });
+                                }
+                              }}
                             />
                           )}
-                          {Products.captureRegistre.docFront.confirmCapture && (
+                          {Products.captureRegistre.docBack.confirmCapture && (
                             <CaptureConfirmDocBack
                               showConfirmModal={this.state.confirmCaptureBack}
                               cancelFunction={() =>
@@ -468,6 +510,76 @@ export default class Register extends Component {
               </>
             ) : (
               <></>
+            )}
+
+            {this.state.selfieUser ? (
+              <>
+                {Products.captureRegistre.selfieUser.textTop && (
+                  <TextTopSelfie />
+                )}
+                {Products.captureRegistre.selfieUser.textTip && (
+                  <TextTipSelfie />
+                )}
+                {Products.captureRegistre.selfieUser.modalSelfie && (
+                  <ModalSelfie
+                    nameBtn={"Capturar Selfie"}
+                    modalHeader={"Selfie Usuario"}
+                    modalBody={
+                      Products.captureRegistre.selfieUser.captureSelfie &&
+                      this.state.viewSelfie === false ? (
+                        <CaptureSelfie capture={this.captureSelfie} />
+                      ) : (
+                        <>
+                          {Products.captureRegistre.selfieUser.imgSelfie && (
+                            <ImgSelfie
+                              titleSelfie={"Selfie do Usuario"}
+                              imgSelfie={this.state.selfieCapture}
+                            />
+                          )}
+                          {Products.captureRegistre.selfieUser
+                            .btnCaptureSelfie && (
+                            <BtnCaptureSelfie
+                              btnNameReset={"Tirar Novamente"}
+                              btnNameConfirm={"Confirmar Foto"}
+                              actionBtnReset={() => {
+                                this.setState({
+                                  selfieCapture: null,
+                                  viewSelfie: false,
+                                });
+                              }}
+                              actionBtnConfirm={() => {
+                                if (isMobile) {
+                                  document.getElementById(
+                                    "modalSelfie"
+                                  ).style.visibility = "hidden";
+                                  this.setState({ confirmCaptureSelfie: true });
+                                } else {
+                                  this.setState({ confirmCaptureSelfie: true });
+                                }
+                              }}
+                            />
+                          )}
+
+                          {Products.captureRegistre.selfieUser
+                            .confirmCapture && (
+                            <CaptureConfirmSelfie
+                              showConfirmModal={this.state.confirmCaptureSelfie}
+                              cancelFunction={() =>
+                                this.confirmCaptureSelfie(1)
+                              }
+                              confirmFunction={() =>
+                                this.confirmCaptureSelfie(2)
+                              }
+                            />
+                          )}
+                        </>
+                      )
+                    } 
+                  />
+                )}
+              </>
+            ) : (
+              <> </>
             )}
           </section>
         ) : null}

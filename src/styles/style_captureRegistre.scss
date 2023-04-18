@@ -33,6 +33,7 @@
     width: 100%;
     border: none;
     margin-top: 10px;
+    
   }
 
   .btnConfirmCapture {
@@ -40,6 +41,7 @@
     width: 100%;
     border: none;
     font-size: 20px;
+    
   }
 
   .btnCancelCapture {
@@ -47,6 +49,14 @@
     width: 100%;
     border: none;
     font-size: 20px
+  }
+
+  @media (min-width: 300px) and (max-width: 800px) {
+     
+    .btnCancelCapture {
+      
+      margin-bottom: 10px;
+    }
   }
   .modalConfirmCaptureDocFront {
     p {

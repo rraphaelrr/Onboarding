@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
 
-function ModalDocFront(capture) {
+function ModalSelfie(capture) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -10,7 +10,7 @@ function ModalDocFront(capture) {
         <Row>
           <Col>
             <Button
-              className="btnModalDocFront"
+              className="btnModalDocBack"
               onClick={() => setShowModal(true)}
             >
               {capture.nameBtn}
@@ -18,14 +18,16 @@ function ModalDocFront(capture) {
           </Col>
         </Row>
 
-        <Modal keyboard={false} show={showModal} size="lg" centered backdrop="static" id="modalFront">
+        <Modal
+          keyboard={false}
+          show={showModal}
+          size="lg"
+          centered
+          backdrop="static"
+          id="modalSelfie"
+        >
           <Modal.Header>
             <Modal.Title>{capture.modalHeader}</Modal.Title>
-            <select disabled={capture.selectDoc} onChangeCapture={capture.changeDocConfirm} value={capture.changeDoc}>
-              
-              <option value={capture.optionRg}>{capture.optionRg}</option>
-              <option value={capture.optionCnh}>{capture.optionCnh}</option>
-            </select>
           </Modal.Header>
           <Modal.Body>{capture.modalBody}</Modal.Body>
         </Modal>
@@ -34,4 +36,4 @@ function ModalDocFront(capture) {
   );
 }
 
-export default ModalDocFront;
+export default ModalSelfie;

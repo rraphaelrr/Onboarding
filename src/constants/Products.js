@@ -48,7 +48,13 @@ export default {
       confirmCapture: true,
     },
     selfieUser: {
-      textTop: false,
+      textTop: true,
+      textTip: true,
+      captureSelfie: true,
+      modalSelfie: true,
+      imgSelfie: true,
+      btnCaptureSelfie: true,
+      confirmCapture: true,
     },
   },
 };

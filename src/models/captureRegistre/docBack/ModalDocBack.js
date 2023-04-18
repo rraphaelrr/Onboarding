@@ -24,6 +24,7 @@ function ModalDocBack(capture) {
           size="lg"
           centered
           backdrop="static"
+          id="modalBack"
         >
           <Modal.Header>
             <Modal.Title>{capture.modalHeader}</Modal.Title>
