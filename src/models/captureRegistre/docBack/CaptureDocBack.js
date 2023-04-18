@@ -24,7 +24,9 @@ function CaptureDocBack({ capture }) {
       {!img ? (
         <div>
           <Webcam
-            
+            videoConstraints={{
+              facingMode: { exact: "environment" },
+            }}
             screenshotQuality={1}
             opacity={6}
             audio={false}

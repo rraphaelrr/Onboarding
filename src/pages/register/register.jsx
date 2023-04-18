@@ -256,10 +256,10 @@ export default class Register extends Component {
       });
     } else if (id == 2) {
       alert("Hey  ");
-      /*  this.setState({
+      this.setState({
         docBack: false,
         selfieUser: true,
-      }); */
+      });
     }
   };
 
@@ -574,7 +574,7 @@ export default class Register extends Component {
                           )}
                         </>
                       )
-                    } 
+                    }
                   />
                 )}
               </>
