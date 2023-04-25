@@ -63,10 +63,10 @@ export default class Register extends Component {
     super(props);
     this.state = {
       /* Section */
-      info: false,
+      info: true,
       confirm: false,
       captureRegistre: false,
-      registerComplete: true,
+      registerComplete: false,
 
       /* States Confirm */
       loading: true,
