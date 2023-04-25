@@ -1,0 +1,72 @@
+@import "./styleSheet.scss";
+
+@media all {
+  .registerComplete {
+    color: $whiteDefault;
+    text-align: center;
+  }
+
+  .textTopRegisterComplete {
+    font-size: 50px;
+    font-weight: $black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .textNoticeRegisterComplete {
+    font-size: 30px;
+    font-weight: $regular;
+  }
+
+  .textTipTopRegisterComplete {
+    
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: $light;
+    display: block;
+    margin: 10px auto;
+    
+    padding-bottom: 10px;
+  }
+
+  .textTipEndRegisterComplete{
+    
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: $light;
+    display: block;
+    margin: 20px auto;
+    
+    padding-bottom: 10px;
+  }
+
+  
+
+  .btnRegisterComplete {
+    background: $bckgCopartEUAHeader;
+    margin-bottom: 20px;
+  }
+
+  
+
+  @media (min-width: 300px) and (max-width: 800px) {
+    .textTopRegisterComplete {
+      font-size: 25px;
+    }
+
+    .infoTextDescr {
+      font-size: 20px;
+    }
+
+    .infoTextTip {
+      margin: 20px auto;
+      font-size: 18px;
+    }
+
+    .btnCopyInfo {
+      font-size: 15px;
+    }
+  }
+}

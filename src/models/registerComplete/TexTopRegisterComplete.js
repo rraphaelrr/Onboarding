@@ -1,22 +1,18 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
-
-function TextTop() {
+function TextTopRegisterComplete() {
   return (
     <>
       <Container>
         <Row>
           <Col>
-            <h2 className="infoTextTop">
-              Obrigado por realizar seu cadastro na Copart.
-            </h2>
+            <h2 className="textTopRegisterComplete">Ok terminamos, muito obrigado.</h2>
           </Col>
-          
         </Row>
       </Container>
     </>
   );
-}   
+}
 
-export default TextTop;
+export default TextTopRegisterComplete;

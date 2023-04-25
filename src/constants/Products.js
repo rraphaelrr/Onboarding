@@ -57,4 +57,12 @@ export default {
       confirmCapture: true,
     },
   },
+
+  registerComplete: {
+    textTopRegisterComplete: true,
+    textTipTop: true,
+    textNotice: true,
+    textTipEnd: true,
+    btnRegisterComplete: true,
+  },
 };

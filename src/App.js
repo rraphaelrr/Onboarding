@@ -7,6 +7,7 @@ import Footer from "./components/footer/footer";
 import Info from "./constants/Info";
 
 function App() {
+  
   document.title = Info.nameBuniss + " - " + Info.nameSystem;
   return (
     <div className="App">

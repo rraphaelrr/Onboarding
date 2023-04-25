@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 
 import Webcam from "react-webcam";
@@ -6,8 +6,6 @@ import Webcam from "react-webcam";
 function CaptureDocFront({ capture }) {
   const webcamRef = useRef(null);
   const [img, setImg] = useState(null);
-
-
 
   const capturePhoto = () => {
     const imgSrc = webcamRef.current.getScreenshot();
@@ -34,7 +32,7 @@ function CaptureDocFront({ capture }) {
             className="captureDocFront"
             capture="environment"
             videoConstraints={{
-              facingMode:  "environment",
+              facingMode: "environment",
             }}
           />
           <Button onClick={capturePhoto} className="btnCapturePhoto">

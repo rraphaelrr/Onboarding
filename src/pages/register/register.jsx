@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as IconMd from "react-icons/md";
 import { isMobile } from "react-device-detect";
+import Info from "../../constants/Info";
 
 /* Import Info */
 import "../../styles/style_info.scss";
@@ -49,14 +50,23 @@ import ImgSelfie from "../../models/captureRegistre/selfieUser/ImgSelfie";
 import BtnCaptureSelfie from "../../models/captureRegistre/selfieUser/BtnCaptureSelfie";
 import CaptureConfirmSelfie from "../../models/captureRegistre/selfieUser/CaptureConfirmSelfie";
 
+/* Import Register Complete */
+import "../../styles/style_registerComplete.scss";
+import TextTopRegisterComplete from "../../models/registerComplete/TexTopRegisterComplete";
+import TextTipTop from "../../models/registerComplete/TextTipTop";
+import TextNotice from "../../models/registerComplete/TextNotice";
+import TextTipEnd from "../../models/registerComplete/TextTipEnd";
+import BtnRegisterComplete from "../../models/registerComplete/BtnRegisterComplete";
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       /* Section */
-      info: true,
+      info: false,
       confirm: false,
       captureRegistre: false,
+      registerComplete: true,
 
       /* States Confirm */
       loading: true,
@@ -126,15 +136,6 @@ export default class Register extends Component {
       document.execCommand("copy");
       document.body.removeChild(input);
       toast.success("URL copiada para a área de transferência!");
-    }
-  };
-
-  requestUserMedia = async () => {
-    try {
-      const constraints = { audio: false, video: { facingMode: "user" } };
-      await navigator.mediaDevices.getUserMedia(constraints);
-    } catch (err) {
-      console.error(err);
     }
   };
 
@@ -255,10 +256,10 @@ export default class Register extends Component {
         viewSelfie: false,
       });
     } else if (id == 2) {
-      alert("Hey  ");
       this.setState({
-        docBack: false,
-        selfieUser: true,
+        selfieUser: false,
+        captureRegistre: false,
+        registerComplete: true,
       });
     }
   };
@@ -296,7 +297,7 @@ export default class Register extends Component {
 
             <ToastContainer
               position="top-right"
-              autoClose={1500}
+              autoClose={2000}
               hideProgressBar={false}
             />
           </section>
@@ -328,7 +329,7 @@ export default class Register extends Component {
                       />
                       <ToastContainer
                         position="top-right"
-                        autoClose={1500}
+                        autoClose={2000}
                         hideProgressBar={false}
                       />
                     </>
@@ -582,6 +583,26 @@ export default class Register extends Component {
               <> </>
             )}
           </section>
+        ) : null}
+
+        {this.state.registerComplete ? (
+          <>
+            <section className="registerComplete">
+              {Products.registerComplete.textTopRegisterComplete && (
+                <TextTopRegisterComplete />
+              )}
+              {Products.registerComplete.textTipTop && <TextTipTop />}
+              {Products.registerComplete.textNotice && <TextNotice />}
+              {Products.registerComplete.textTipEnd && <TextTipEnd />}
+              {Products.registerComplete.btnRegisterComplete && (
+                <BtnRegisterComplete
+                  classNameBtnRegisterComplete={"btnRegisterComplete"}
+                  btnName={"Ir para o website copart.com.br"}
+                  actionClick={() => (window.location.href = Info.urlMemberQA)}
+                />
+              )}
+            </section>
+          </>
         ) : null}
       </>
     );
