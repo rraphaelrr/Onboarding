@@ -1,19 +1,22 @@
 import api from "../api/api";
-import { saveAs } from "file-saver";
 
-export const handleDownload = (data) => {
-  const doc = data.docNamme;
-  const capture = data.captureType;
-
-  const byteString = atob(doc.split(",")[1]);
-  const mimeString = doc.split(",")[0].split(":")[1].split(";")[0];
-  const ab = new ArrayBuffer(byteString.length);
-  const ia = new Uint8Array(ab);
-
-  for (let i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
-  }
-
-  const blob = new Blob([ab], { type: mimeString });
-  return saveAs(blob, doc + "_" + capture + ".jpg");
+export const headers = {
+  authorization:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjM0NDcsInV0eXBlIjoiY29wYXJ0Iiwic3VidHlwZSI6IiIsInVuYW1lIjoicmFwaGFlbHJvZCIsImN1c3RvbSI6eyJhbGxvd2VkWWFyZHMiOltdfSwiZXhwIjo2MzgxODAzODQ3OTI0NjMxMjZ9.6VhWDpVoaSntnYjdUcXhR6TS2lLdgdIBfGJqTryfq8A",
 };
+
+export async function consultingUserInfo(data) {
+  const body = data;
+  const response = await api.get("Onboarding/GetCodeInformation?code=" + body, {
+    headers,
+  });
+  return response.data;
+}
+
+export async function getMemberInformation(data) {
+  const body = data;
+  const response = await api.post("Onboarding/GetMemberInformation", body, {
+    headers,
+  });
+  return response.data;
+}

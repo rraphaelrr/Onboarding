@@ -4,14 +4,16 @@ import Products from "../constants/Products";
 
 var urlAPi = "";
 
-if (Products.api.homolog) {
-    urlAPi = Info.urlHomolog
-} else if (Products.api.production) {
-    urlAPi = Info.urlProduct;
+if (Products.api.dev) {
+  urlAPi = Info.urlDev;
+} else if (Products.api.qa) {
+  urlAPi = Info.urlQA;
+} else if (Products.api.deploy) {
+  urlAPi = Info.urlDeploy;
 }
 
 const api = axios.create({
-  baseURL: urlAPi
+  baseURL: urlAPi,
 });
 
 export default api;

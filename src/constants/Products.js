@@ -1,8 +1,9 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   api: {
-    homolog: true,
-    production: false,
+    dev: false,
+    qa: true,
+    deploy: false,
   },
 
   components: {

@@ -7,7 +7,7 @@ function TextNotice() {
       <Container>
         <Row>
           <Col>
-            <h5 className="infoTextDescr">
+            <h5 className="textNoticeRegisterComplete">
               Em instantes você receberá mais informações. Se sua conta for
               aprovada, você receberá um e-mail com a confirmação.
             </h5>

@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import * as IconMd from "react-icons/md";
 import { isMobile } from "react-device-detect";
 import Info from "../../constants/Info";
+import * as Function from "../../constants/Functions";
+import * as Format from "../../constants/Format";
 
 /* Import Info */
 import "../../styles/style_info.scss";
@@ -62,6 +64,8 @@ export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      code: "87583386",
+
       /* Section */
       info: true,
       confirm: false,
@@ -110,16 +114,13 @@ export default class Register extends Component {
       navigator.mediaDevices.getUserMedia({ video: true });
     }
 
-    const userRegistrer = [
-      {
-        nome: "FERNANDO LEONARDO JOÃO MOREIRA ",
-        celular: "(11) 9****0930",
-        email: "t*********t@uorak.com",
-      },
-    ];
+    const dados = this.state.code;
 
-    this.setState({ userRegistrer: userRegistrer });
-    this.setState({ cpf: "390.736." });
+    Function.consultingUserInfo(dados).then((res) => {
+      this.setState({
+        cpf: Format.docPartialMask(res.partialIdentity),
+      });
+    });
   };
 
   copyUrl = async () => {
@@ -153,33 +154,34 @@ export default class Register extends Component {
     const cpf = e;
 
     if (cpf !== null || cpf !== "") {
-      this.setState({ cpfConfirm: cpf.replace(/[^\d]/g, "") });
+      this.setState({ cpfConfirm: cpf });
     }
   };
 
-  searchUSer = () => {
-    console.log(this.state.cpfConfirm.length);
-    let userArray = [];
+  searchUSer = async () => {
+    const cpf = this.state.cpf + this.state.cpfConfirm;
+
     if (
       this.state.cpfConfirm === null ||
       this.state.cpfConfirm === "" ||
-      this.state.cpfConfirm.length < 5
+      this.state.cpfConfirm.replace(/[^\d]/g, "").length < 5
     ) {
       toast.error(
         "É necessario preencher os ultimos 5 digitos do CPF para poder prosseguir!"
       );
     } else {
-      // eslint-disable-next-line array-callback-return
-      this.state.userRegistrer.map((user) => {
-        userArray.push(user);
+      const dados = {
+        code: this.state.code,
+        cpf: Format.removeDocMask(cpf),
+      };
+      console.log(dados);
+      Function.getMemberInformation(dados).then((res) => {
+        if (res.resultCode == 1) {
+          toast.error(res.resultMessage);
+        } else {
+          this.setState({ user: res.item, cpfUser: cpf, formConfirm: false });
+        }
       });
-
-      this.setState({
-        user: userArray,
-      });
-      const cpfUser = this.state.cpf + this.state.cpfConfirm;
-
-      this.setState({ cpfUser: cpfUser, formConfirm: false });
     }
   };
 
@@ -336,18 +338,14 @@ export default class Register extends Component {
                   )
                 ) : (
                   <>
-                    {Products.confirm.textUserConfirm &&
-                      this.state.user.map((use) => {
-                        return (
-                          <TextUserConfirm
-                            key={use}
-                            nameUser={use.nome}
-                            phoneUser={use.celular}
-                            emailUser={use.email}
-                            userCPF={this.state.cpfUser}
-                          />
-                        );
-                      })}
+                    {Products.confirm.textUserConfirm && (
+                      <TextUserConfirm
+                        nameUser={this.state.user.nome}
+                        phoneUser={this.state.user.telefone}
+                        emailUser={this.state.user.email}
+                        userCPF={this.state.cpfUser}
+                      />
+                    )}
 
                     {Products.confirm.btnConfirm && (
                       <BtnConfirm
