@@ -63,8 +63,9 @@ import BtnRegisterComplete from "../../models/registerComplete/BtnRegisterComple
 export default class Register extends Component {
   constructor(props) {
     super(props);
+    global.userAgentBrowser = window.navigator.userAgent;
     this.state = {
-      code: "87583386",
+      code: "67583361",
 
       /* Section */
       info: true,
@@ -107,6 +108,9 @@ export default class Register extends Component {
   }
 
   componentDidMount = () => {
+    let urlProjeto = window.location.href.split("/").slice(0, -1).join("/");
+    console.log(urlProjeto); 
+    console.log(global.userAgentBrowser);
     if (
       "mediaDevices" in navigator &&
       "getUserMedia" in navigator.mediaDevices
@@ -117,6 +121,7 @@ export default class Register extends Component {
     const dados = this.state.code;
 
     Function.consultingUserInfo(dados).then((res) => {
+      console.log(res.partialIdentity);
       this.setState({
         cpf: Format.docPartialMask(res.partialIdentity),
       });
@@ -258,10 +263,23 @@ export default class Register extends Component {
         viewSelfie: false,
       });
     } else if (id == 2) {
-      this.setState({
-        selfieUser: false,
-        captureRegistre: false,
-        registerComplete: true,
+      const dados = {
+        codigo: this.state.code,
+        identity: this.state.cpf,
+        browserUserAgent: global.userAgentBrowser,
+        docFrente: this.state.docFrontCapture,
+        docVerso: this.state.docBackCapture,
+        facematch: this.state.selfieCapture,
+      };
+      Function.setPictures(dados).then((res) => {
+        console.log(res);
+        if (res.resultCode == 0) {
+          this.setState({
+            selfieUser: false,
+            captureRegistre: false,
+            registerComplete: true,
+          });
+        }
       });
     }
   };
