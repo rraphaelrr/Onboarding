@@ -11,6 +11,7 @@ function CaptureConfirmSelfie(capture) {
         size="md"
         backdrop="static"
         className="modalConfirmCaptureDocBack"
+        id="modalSelfieConfirm"
       >
         <Modal.Header>
           <Modal.Title>

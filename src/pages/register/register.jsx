@@ -25,6 +25,7 @@ import TextDescrConfirm from "../../models/confirm/TextDescrConfirm";
 import FormConfirm from "../../models/confirm/FormConfirm";
 import TextUserConfirm from "../../models/confirm/TextUserConfirm";
 import BtnConfirm from "../../models/confirm/BtnConfirm";
+import ModalConfirm from "../../models/confirm/ModalConfirm";
 
 /* Import Capture Registre */
 import "../../styles/style_captureRegistre.scss";
@@ -51,6 +52,7 @@ import ModalSelfie from "../../models/captureRegistre/selfieUser/ModalSelfie";
 import ImgSelfie from "../../models/captureRegistre/selfieUser/ImgSelfie";
 import BtnCaptureSelfie from "../../models/captureRegistre/selfieUser/BtnCaptureSelfie";
 import CaptureConfirmSelfie from "../../models/captureRegistre/selfieUser/CaptureConfirmSelfie";
+import ModalCompleteRegister from "../../models/captureRegistre/selfieUser/ModalCompleteRegister";
 
 /* Import Register Complete */
 import "../../styles/style_registerComplete.scss";
@@ -81,6 +83,7 @@ export default class Register extends Component {
       userCPf: "",
       userRegistrer: [],
       user: [],
+      confirmLoading: false,
 
       /* States Capture */
       typeDoc: "",
@@ -104,12 +107,13 @@ export default class Register extends Component {
       confirmCaptureFront: false,
       confirmCaptureBack: false,
       confirmCaptureSelfie: false,
+      loadingCompleteRegister: false,
     };
   }
 
   componentDidMount = () => {
     let urlProjeto = window.location.href.split("/").slice(0, -1).join("/");
-    console.log(urlProjeto); 
+    console.log(urlProjeto);
     console.log(global.userAgentBrowser);
     if (
       "mediaDevices" in navigator &&
@@ -175,6 +179,7 @@ export default class Register extends Component {
         "É necessario preencher os ultimos 5 digitos do CPF para poder prosseguir!"
       );
     } else {
+      this.setState({ confirmLoading: true });
       const dados = {
         code: this.state.code,
         cpf: Format.removeDocMask(cpf),
@@ -184,7 +189,12 @@ export default class Register extends Component {
         if (res.resultCode == 1) {
           toast.error(res.resultMessage);
         } else {
-          this.setState({ user: res.item, cpfUser: cpf, formConfirm: false });
+          this.setState({
+            user: res.item,
+            cpfUser: cpf,
+            formConfirm: false,
+            confirmLoading: false,
+          });
         }
       });
     }
@@ -263,6 +273,13 @@ export default class Register extends Component {
         viewSelfie: false,
       });
     } else if (id == 2) {
+      if (isMobile) {
+        document.getElementById("modalSelfieConfirm").style.visibility =
+          "hidden";
+        this.setState({ loadingCompleteRegister: true });
+      } else {
+        this.setState({ loadingCompleteRegister: true });
+      }
       const dados = {
         codigo: this.state.code,
         identity: this.state.cpf,
@@ -277,6 +294,7 @@ export default class Register extends Component {
           this.setState({
             selfieUser: false,
             captureRegistre: false,
+            loadingCompleteRegister: false,
             registerComplete: true,
           });
         }
@@ -336,24 +354,37 @@ export default class Register extends Component {
                 {Products.confirm.textWelcomeConfirm && <TextWelcome />}
                 {Products.confirm.textDescrConfirm && <TextDescrConfirm />}
                 {this.state.formConfirm ? (
-                  Products.confirm.formConfirm && (
-                    <>
-                      <FormConfirm
-                        cpfUser={this.state.cpf}
-                        userChange={this.state.cpfConfirm}
-                        userChangeConfirm={(e) =>
-                          this.cpfChange(e.target.value)
-                        }
-                        btnConfirmForm={() => this.searchUSer()}
-                        btnName={"Pesquisar"}
-                      />
-                      <ToastContainer
-                        position="top-right"
-                        autoClose={2000}
-                        hideProgressBar={false}
-                      />
-                    </>
-                  )
+                  <>
+                    {Products.confirm.formConfirm && (
+                      <>
+                        <FormConfirm
+                          cpfUser={this.state.cpf}
+                          userChange={this.state.cpfConfirm}
+                          userChangeConfirm={(e) =>
+                            this.cpfChange(e.target.value)
+                          }
+                          btnConfirmForm={() => this.searchUSer()}
+                          btnName={"Pesquisar"}
+                        />
+                        <ToastContainer
+                          position="top-right"
+                          autoClose={2000}
+                          hideProgressBar={false}
+                        />
+                        {Products.confirm.modalConfirm && (
+                          <ModalConfirm
+                            showLoading={this.state.confirmLoading}
+                            modalHeader={
+                              "So um momento, estamos buscando seus dados"
+                            }
+                          />
+                        )}
+                      </>
+                    )}
+                    {Products.confirm.modalConfirm && (
+                      <ModalConfirm showLoading={this.state.loadingConfirm} />
+                    )}
+                  </>
                 ) : (
                   <>
                     {Products.confirm.textUserConfirm && (
@@ -589,6 +620,14 @@ export default class Register extends Component {
                               }
                             />
                           )}
+                          {Products.captureRegistre.loadingCompleteRegister && (
+                            <ModalCompleteRegister
+                              showLoading={this.state.loadingCompleteRegister}
+                              modalHeader={
+                                "So um momento, estamos enviando as imagens capturadas para a analise"
+                              }
+                            />
+                          )}
                         </>
                       )
                     }
@@ -604,6 +643,7 @@ export default class Register extends Component {
         {this.state.registerComplete ? (
           <>
             <section className="registerComplete">
+              {}
               {Products.registerComplete.textTopRegisterComplete && (
                 <TextTopRegisterComplete />
               )}

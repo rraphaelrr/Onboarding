@@ -27,6 +27,7 @@ export default {
     textDescrConfirm: true,
     formConfirm: true,
     textUserConfirm: true,
+    modalConfirm: true,
   },
 
   captureRegistre: {
@@ -57,6 +58,7 @@ export default {
       btnCaptureSelfie: true,
       confirmCapture: true,
     },
+    loadingCompleteRegister: true,
   },
 
   registerComplete: {
