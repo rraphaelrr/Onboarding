@@ -67,7 +67,7 @@ export default class Register extends Component {
     super(props);
     global.userAgentBrowser = window.navigator.userAgent;
     this.state = {
-      code: "67583361",
+      code: "27583322",
 
       /* Section */
       info: true,
@@ -187,6 +187,7 @@ export default class Register extends Component {
       console.log(dados);
       Function.getMemberInformation(dados).then((res) => {
         if (res.resultCode == 1) {
+          this.setState({ confirmLoading: false });
           toast.error(res.resultMessage);
         } else {
           this.setState({
@@ -304,7 +305,7 @@ export default class Register extends Component {
 
   render() {
     return (
-      <>
+      <div>
         {/* Section Info */}
         {this.state.info ? (
           <section className="info">
@@ -354,9 +355,9 @@ export default class Register extends Component {
                 {Products.confirm.textWelcomeConfirm && <TextWelcome />}
                 {Products.confirm.textDescrConfirm && <TextDescrConfirm />}
                 {this.state.formConfirm ? (
-                  <>
+                  <div>
                     {Products.confirm.formConfirm && (
-                      <>
+                      <div>
                         <FormConfirm
                           cpfUser={this.state.cpf}
                           userChange={this.state.cpfConfirm}
@@ -379,14 +380,14 @@ export default class Register extends Component {
                             }
                           />
                         )}
-                      </>
+                      </div>
                     )}
                     {Products.confirm.modalConfirm && (
                       <ModalConfirm showLoading={this.state.loadingConfirm} />
                     )}
-                  </>
+                  </div>
                 ) : (
-                  <>
+                  <div>
                     {Products.confirm.textUserConfirm && (
                       <TextUserConfirm
                         nameUser={this.state.user.nome}
@@ -402,7 +403,7 @@ export default class Register extends Component {
                         actionClick={() => this.confirmUser()}
                       />
                     )}
-                  </>
+                  </div>
                 )}
               </div>
             )}
@@ -412,7 +413,7 @@ export default class Register extends Component {
         {this.state.captureRegistre ? (
           <section className="captureRegistre">
             {this.state.docFront ? (
-              <>
+              <div>
                 {Products.captureRegistre.docFront.textTop && (
                   <TextTopDocFront />
                 )}
@@ -433,7 +434,7 @@ export default class Register extends Component {
                       this.state.viewDocFront === false ? (
                         <CaptureDocFront capture={this.captureDocFront} />
                       ) : (
-                        <>
+                        <div>
                           {Products.captureRegistre.docFront.imgDocFront && (
                             <ImgDocFront
                               titleImgDocFront={
@@ -477,18 +478,18 @@ export default class Register extends Component {
                               }
                             />
                           )}
-                        </>
+                        </div>
                       )
                     }
                   />
                 )}
-              </>
+              </div>
             ) : (
-              <></>
+              <div></div>
             )}
 
             {this.state.docBack ? (
-              <>
+              <div>
                 {Products.captureRegistre.docBack.textTop && <TextTopDocBack />}
 
                 {Products.captureRegistre.docBack.textTip && <TextTipDocBack />}
@@ -507,7 +508,7 @@ export default class Register extends Component {
                       this.state.viewDocBack === false ? (
                         <CaptureDocBack capture={this.captureDocBack} />
                       ) : (
-                        <>
+                        <div>
                           {Products.captureRegistre.docBack.imgDocBack && (
                             <ImgDocBack
                               titleImgDocBack={
@@ -550,18 +551,18 @@ export default class Register extends Component {
                               }
                             />
                           )}
-                        </>
+                        </div>
                       )
                     }
                   />
                 )}
-              </>
+              </div>
             ) : (
-              <></>
+              <div></div>
             )}
 
             {this.state.selfieUser ? (
-              <>
+              <div>
                 {Products.captureRegistre.selfieUser.textTop && (
                   <TextTopSelfie />
                 )}
@@ -577,7 +578,7 @@ export default class Register extends Component {
                       this.state.viewSelfie === false ? (
                         <CaptureSelfie capture={this.captureSelfie} />
                       ) : (
-                        <>
+                        <div>
                           {Products.captureRegistre.selfieUser.imgSelfie && (
                             <ImgSelfie
                               titleSelfie={"Selfie do Usuario"}
@@ -628,20 +629,20 @@ export default class Register extends Component {
                               }
                             />
                           )}
-                        </>
+                        </div>
                       )
                     }
                   />
                 )}
-              </>
+              </div>
             ) : (
-              <> </>
+              <div> </div>
             )}
           </section>
         ) : null}
 
         {this.state.registerComplete ? (
-          <>
+          <div>
             <section className="registerComplete">
               {}
               {Products.registerComplete.textTopRegisterComplete && (
@@ -658,9 +659,9 @@ export default class Register extends Component {
                 />
               )}
             </section>
-          </>
+          </div>
         ) : null}
-      </>
+      </div>
     );
   }
 }
