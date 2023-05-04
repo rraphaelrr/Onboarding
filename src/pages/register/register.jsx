@@ -67,7 +67,7 @@ export default class Register extends Component {
     super(props);
     global.userAgentBrowser = window.navigator.userAgent;
     this.state = {
-      code: "27583322",
+      code: "07583225",
 
       /* Section */
       info: true,
@@ -238,9 +238,12 @@ export default class Register extends Component {
 
   confirmCaptureDocFront = (id) => {
     if (id == 1) {
+      document.getElementById("modalFront").style.visibility = "visible";
       this.setState({
-        docFrontCapture: null,
         viewDocFront: false,
+
+        confirmCaptureFront: false,
+        docFrontCapture: null,
         disabledSelectDoc: false,
       });
     } else if (id == 2) {
@@ -255,7 +258,9 @@ export default class Register extends Component {
 
   confirmCaptureDocBack = (id) => {
     if (id == 1) {
+      document.getElementById("modalBack").style.visibility = "visible";
       this.setState({
+        confirmCaptureBack: false,
         docBackCapture: null,
         viewDocBack: false,
       });
@@ -269,7 +274,9 @@ export default class Register extends Component {
 
   confirmCaptureSelfie = (id) => {
     if (id == 1) {
+      document.getElementById("modalSelfie").style.visibility = "visible";
       this.setState({
+        confirmCaptureSelfie: false,
         selfieCapture: null,
         viewSelfie: false,
       });
@@ -572,7 +579,7 @@ export default class Register extends Component {
                 {Products.captureRegistre.selfieUser.modalSelfie && (
                   <ModalSelfie
                     nameBtn={"Capturar Selfie"}
-                    modalHeader={"Selfie Usuario"}
+                    modalHeader={"Selfie Usuário"}
                     modalBody={
                       Products.captureRegistre.selfieUser.captureSelfie &&
                       this.state.viewSelfie === false ? (

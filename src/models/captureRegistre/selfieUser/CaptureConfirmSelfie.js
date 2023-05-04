@@ -15,15 +15,16 @@ function CaptureConfirmSelfie(capture) {
       >
         <Modal.Header>
           <Modal.Title>
-            Deseja confirma a foto tirada e seguir para o proximo passo?
+            Deseja confirma a foto tirada e seguir para o próximo passo?
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
-            <Col> 
+            <Col>
               <p>
-                Caso confirma a foto tirada não podera retorna para essa etapa
-                novamente, se prefirir tirar outra foto, selecione Cancelar
+                Caso confirmar a foto tirada não conseguira retorna para essa
+                etapa novamente, se preferir tirar outra foto, selecione
+                Cancelar
               </p>
             </Col>
           </Row>

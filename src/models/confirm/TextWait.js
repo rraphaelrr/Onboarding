@@ -12,7 +12,7 @@ function TextWait() {
         </Row>
         <Row>
           <Col>
-            <h5>Estamos Carregando algumas informações sobre seu cadastro.</h5>
+            <h5>Estamos Carregando algumas informações sobre o seu cadastro.</h5>
           </Col>
         </Row>
       </Container>
