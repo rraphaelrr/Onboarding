@@ -8,6 +8,8 @@ if (Products.api.dev) {
   urlAPi = Info.urlDev;
 } else if (Products.api.qa) {
   urlAPi = Info.urlQA;
+} else if (Products.api.qa2) {
+  urlAPi = Info.urlQA2;
 } else if (Products.api.deploy) {
   urlAPi = Info.urlDeploy;
 }
