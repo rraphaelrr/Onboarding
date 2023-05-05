@@ -14,16 +14,14 @@ function CaptureConfirmDocBack(capture) {
       >
         <Modal.Header>
           <Modal.Title>
-            Deseja confirma a foto tirada e seguir para o próximo passo?
+            Deseja confirmar a foto tirada e seguir para o próximo passo?
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
             <Col>
               <p>
-                Caso confirmar a foto tirada não conseguira retorna para essa
-                etapa novamente, se preferir tirar outra foto, selecione
-                Cancelar
+                Caso confirme a foto tirada não conseguirá retornar para essa etapa novamente. Se preferir tirar outra foto, selecione Cancelar.
               </p>
             </Col>
           </Row>

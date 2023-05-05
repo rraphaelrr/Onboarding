@@ -67,7 +67,7 @@ export default class Register extends Component {
     super(props);
     global.userAgentBrowser = window.navigator.userAgent;
     this.state = {
-      code: "07583219",
+      code: "57583199",
 
       /* Section */
       info: true,
@@ -383,7 +383,7 @@ export default class Register extends Component {
                           <ModalConfirm
                             showLoading={this.state.confirmLoading}
                             modalHeader={
-                              "So um momento, estamos buscando seus dados"
+                              "Só um momento, estamos buscando seus dados"
                             }
                           />
                         )}
@@ -632,7 +632,7 @@ export default class Register extends Component {
                             <ModalCompleteRegister
                               showLoading={this.state.loadingCompleteRegister}
                               modalHeader={
-                                "So um momento, estamos enviando as imagens capturadas para a analise"
+                                "Só um momento, estamos enviando as imagens capturadas para a analise"
                               }
                             />
                           )}

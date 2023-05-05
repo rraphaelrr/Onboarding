@@ -22,9 +22,7 @@ function CaptureConfirmSelfie(capture) {
           <Row>
             <Col>
               <p>
-                Caso confirmar a foto tirada não conseguira retorna para essa
-                etapa novamente, se preferir tirar outra foto, selecione
-                Cancelar
+                Caso confirme a foto tirada não conseguirá retornar para essa etapa novamente. Se preferir tirar outra foto, selecione Cancelar.
               </p>
             </Col>
           </Row>

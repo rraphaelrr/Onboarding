@@ -8,7 +8,7 @@ function TextDescr() {
         <Row>
           <Col>
             <h5 className="infoTextDescr">
-              Vamos agora ajuda-lo a habilitar seu cadastro de forma rápida e
+              Vamos agora ajudá-lo a habilitar seu cadastro de forma rápida e
               simples. Mas antes de prosseguirmos, por favor siga as
               recomendações a seguir.
             </h5>
