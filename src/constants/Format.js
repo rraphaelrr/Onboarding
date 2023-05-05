@@ -1,5 +1,9 @@
 export function docPartialMask(value) {
-  return Number(value).toLocaleString("pt-BR") + ".";
+  const numberFormat = value.toLocaleString("pt-BR", {
+    minimumFractionDigits: 0,
+  });
+  const maskNumber = numberFormat.replace(/(\d{3})(\d{3})/, "$1.$2");
+  return maskNumber + ".";
 }
 
 export function removeDocMask(value) {
