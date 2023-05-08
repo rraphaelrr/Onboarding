@@ -67,7 +67,7 @@ export default class Register extends Component {
     super(props);
     global.userAgentBrowser = window.navigator.userAgent;
     this.state = {
-      code: "57583199",
+      code: "",
 
       /* Section */
       info: true,
@@ -112,8 +112,11 @@ export default class Register extends Component {
   }
 
   componentDidMount = () => {
-    let urlProjeto = window.location.href.split("/").slice(0, -1).join("/");
-    console.log(urlProjeto);
+    const url = window.location.href;
+    const parts = url.split("/");
+    const valor = parts.pop();
+    this.setState({ code: valor });
+
     console.log(global.userAgentBrowser);
     if (
       "mediaDevices" in navigator &&
@@ -122,7 +125,7 @@ export default class Register extends Component {
       navigator.mediaDevices.getUserMedia({ video: true });
     }
 
-    const dados = this.state.code;
+    const dados = valor;
 
     Function.consultingUserInfo(dados).then((res) => {
       console.log(res.partialIdentity);
@@ -133,6 +136,7 @@ export default class Register extends Component {
   };
 
   copyUrl = async () => {
+    console.log(this.state.code);
     const url = window.location.href;
     try {
       await navigator.clipboard.writeText(url);
