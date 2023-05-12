@@ -113,9 +113,11 @@ export default class Register extends Component {
 
   componentDidMount = () => {
     const url = window.location.href;
-    const parts = url.split("/");
-    const valor = parts.pop();
-    this.setState({ code: valor });
+    const parts = url.split("/?");
+    const code = parts.pop();
+    console.log(url);
+
+    this.setState({ code: code });
 
     console.log(global.userAgentBrowser);
     if (
@@ -125,7 +127,7 @@ export default class Register extends Component {
       navigator.mediaDevices.getUserMedia({ video: true });
     }
 
-    const dados = valor;
+    const dados = code;
 
     Function.consultingUserInfo(dados).then((res) => {
       console.log(res.partialIdentity);
