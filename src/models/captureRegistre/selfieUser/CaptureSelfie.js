@@ -24,7 +24,7 @@ function CaptureSelfie({ capture }) {
       {!img ? (
         <div>
           <Webcam
-            mirrored={false}
+            
             screenshotQuality={1}
             opacity={6}
             audio={false}

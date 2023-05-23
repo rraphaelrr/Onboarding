@@ -115,7 +115,7 @@ export default class Register extends Component {
     const url = window.location.href;
     const parts = url.split("/?");
     const code = parts.pop();
-    console.log(url);
+    console.log("Url:" + code);
 
     this.setState({ code: code });
 
@@ -128,6 +128,8 @@ export default class Register extends Component {
     }
 
     const dados = code;
+
+    console.log(dados);
 
     Function.consultingUserInfo(dados).then((res) => {
       console.log(res.partialIdentity);
@@ -244,7 +246,9 @@ export default class Register extends Component {
 
   confirmCaptureDocFront = (id) => {
     if (id == 1) {
-      document.getElementById("modalFront").style.visibility = "visible";
+      if (isMobile) {
+        document.getElementById("modalFront").style.visibility = "visible";
+      }
       this.setState({
         viewDocFront: false,
 

@@ -5,12 +5,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Register from "../pages/register/register";
 
 const Rotas = () => {
-  const url = window.location.href;
-  const parts = url.split("/");
-  const valor = parts.pop();
-  console.log(url);
-  console.log(parts);
-  console.log(valor);
+  
   return (
     <BrowserRouter>
       <Routes>

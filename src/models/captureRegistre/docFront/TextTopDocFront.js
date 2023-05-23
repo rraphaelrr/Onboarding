@@ -8,7 +8,7 @@ function TextTopDocFront() {
         <Row>
           <Col>
             <h5 className="textTopDocFront">
-              Agora vamos tirar uma foto do seu documento de identificação , que
+              Agora vamos tirar uma foto do seu documento de identificação, que
               pode ser um RG, desde que ele possua também o número do seu CPF ou
               uma CNH. Se estiver dentro de uma capa plástica, por favor a
               retire.

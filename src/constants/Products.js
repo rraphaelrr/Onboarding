@@ -2,8 +2,8 @@
 export default {
   api: {
     dev: false,
-    qa: false,
-    qa2: true,
+    qa: true,
+    qa2: false,
     deploy: false,
   },
 
