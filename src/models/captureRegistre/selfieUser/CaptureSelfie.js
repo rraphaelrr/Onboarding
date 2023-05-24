@@ -1,5 +1,6 @@
 import React, { useRef, useState, useCallback } from "react";
 import { Button, Image } from "react-bootstrap";
+import { isMobile } from "react-device-detect";
 import Webcam from "react-webcam";
 
 function CaptureSelfie({ capture }) {
@@ -23,14 +24,33 @@ function CaptureSelfie({ capture }) {
     <>
       {!img ? (
         <div>
-          <Webcam
-            
-            screenshotQuality={1}
-            opacity={6}
-            audio={false}
-            ref={webcamRef}
-            className="captureDocBack"
-          />
+          {isMobile ? (
+            <Webcam
+              screenshotQuality={1}
+              opacity={6}
+              audio={false}
+              ref={webcamRef}
+              className="captureDocFront"
+              capture="user"
+              videoConstraints={{
+                facingMode: "user",
+              }}
+            />
+          ) : (
+            <Webcam
+              mirrored={true}
+              screenshotQuality={1}
+              opacity={6}
+              audio={false}
+              ref={webcamRef}
+              className="captureDocFront"
+              capture="user"
+              videoConstraints={{
+                facingMode: "user",
+              }}
+            />
+          )}
+          
           <Button onClick={capturePhotoBack} className="btnCapturePhoto">
             Capturar Foto
           </Button>

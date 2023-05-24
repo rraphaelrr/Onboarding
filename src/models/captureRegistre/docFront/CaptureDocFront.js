@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Button, Image } from "react-bootstrap";
+import { isMobile } from "react-device-detect";
 
 import Webcam from "react-webcam";
 
@@ -24,17 +25,33 @@ function CaptureDocFront({ capture }) {
     <>
       {!img ? (
         <div>
-          <Webcam
-            screenshotQuality={1}
-            opacity={6}
-            audio={false}
-            ref={webcamRef}
-            className="captureDocFront"
-            capture="environment"
-            videoConstraints={{
-              facingMode: "environment",
-            }}
-          />
+          {isMobile ? (
+            <Webcam
+              screenshotQuality={1}
+              opacity={6}
+              audio={false}
+              ref={webcamRef}
+              className="captureDocFront"
+              capture="environment"
+              videoConstraints={{
+                facingMode: "environment",
+              }}
+            />
+          ) : (
+            <Webcam
+              mirrored={true}
+              screenshotQuality={1}
+              opacity={6}
+              audio={false}
+              ref={webcamRef}
+              className="captureDocFront"
+              capture="environment"
+              videoConstraints={{
+                facingMode: "environment",
+              }}
+            />
+          )}
+
           <Button onClick={capturePhoto} className="btnCapturePhoto">
             Capturar Foto
           </Button>

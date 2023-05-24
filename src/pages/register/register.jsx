@@ -112,6 +112,12 @@ export default class Register extends Component {
   }
 
   componentDidMount = () => {
+    document.addEventListener("keydown", function (e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+      }
+    });
+
     const url = window.location.href;
     const parts = url.split("/?");
     const code = parts.pop();
